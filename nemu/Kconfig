@@ -13,6 +13,10 @@ config ISA_loongarch32r
   bool "loongarch32r"
 endchoice
 
+config WATCHPOINT
+    bool "Enable Watchpoint"
+    default n
+
 config ISA
   string
   default "x86" if ISA_x86
