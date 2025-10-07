@@ -66,6 +66,28 @@ static int cmd_si(char *args) {
   return 0;
 }
 
+static int cmd_p(char *args) {
+  if (args == NULL) {
+    printf("Usage: p EXPR\n");
+    return 0;
+  }
+  // 跳过前导空格
+  while (*args == ' ') args++;
+  if (*args == '\0') {
+    printf("Usage: p EXPR\n");
+    return 0;
+  }
+
+  bool success = true;
+  word_t val = expr(args, &success);
+  if (!success) {
+    printf("Bad expression: %s\n", args);
+    return 0;
+  }
+  printf("= %u (0x%08x)\n", (uint32_t)val, (uint32_t)val);
+  return 0;
+}
+
 static int cmd_x(char *args) {
   if (args == NULL) {
     printf("Usage: x N EXPR\n");
@@ -138,6 +160,7 @@ static struct {
   { "si", "Step through N instructions", cmd_si },
   { "info", "Print register or watchpoint info", cmd_info },
   { "x", "Examine memory", cmd_x },
+  { "p", "Evaluate an expression", cmd_p },
   { "w", "Set a watchpoint for an expression", cmd_w },
   { "d", "Delete a watchpoint by number", cmd_d },
 };
