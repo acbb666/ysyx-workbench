@@ -59,7 +59,7 @@ static WP* new_wp() {
   return wp;
 }
 
-/* ✅ 修改3：实现 free_wp，把 wp 放回 free_ 链表 */
+/* 修改3：实现 free_wp，把 wp 放回 free_ 链表 */
 static void free_wp(WP *wp) {
   // 从 head 链表里删除
   if (head == wp) {
@@ -77,7 +77,7 @@ static void free_wp(WP *wp) {
   free_ = wp;
 }
 
-/* ✅ 修改4：添加设置监视点接口 */
+/* 修改4：添加设置监视点接口 */
 void wp_set(char *e) {
   WP *wp = new_wp();
   strcpy(wp->expr, e);
@@ -90,7 +90,7 @@ void wp_set(char *e) {
   printf("Set watchpoint %d: %s = %u\n", wp->NO, wp->expr, val);
 }
 
-/* ✅ 修改5：删除监视点接口 */
+/* 修改5：删除监视点接口 */
 void wp_delete(int no) {
     WP *prev = NULL, *wp = head;
     while (wp) {
@@ -108,7 +108,7 @@ void wp_delete(int no) {
 }
 
 
-/* ✅ 修改6：打印监视点 */
+/* 修改6：打印监视点 */
 void wp_info() {
   if (head == NULL) {
     printf("No watchpoints.\n");
@@ -121,7 +121,7 @@ void wp_info() {
   }
 }
 
-/* ✅ 修改7：在每条指令后检查监视点 */
+/* 修改7：在每条指令后检查监视点 */
 bool check_watchpoints() {
   WP *wp = head;
   bool stop = false;
